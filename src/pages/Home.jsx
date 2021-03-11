@@ -1,20 +1,16 @@
-import React, { Fragment } from "react";
-import TaskReduxForm from "../components/Form/Form";
-import Tasks from "../components/Tasks/Tasks";
+import React from "react";
+import Form from "../components/Form/Form";
+import Notes from "../components/Notes/Notes";
 
-const Home = (props) => {
-  const onSubmit = (formData) => {
-    console.log(formData);
-  };
-  const tasks = [
-    { id: 1, name: "ffff" },
-    { id: 2, name: "aaa" },
-  ];
+const Home = () => {
+  const notes = new Array(3)
+    .fill("")
+    .map((_, i) => ({ id: i, title: `Note ${i + 1}` }));
   return (
-    <Fragment>
-      <TaskReduxForm onSubmit={onSubmit} />
-      <Tasks tasks={tasks} />
-    </Fragment>
+    <div className="home mt-5">
+      <Form />
+      <Notes notes={notes} />
+    </div>
   );
 };
 

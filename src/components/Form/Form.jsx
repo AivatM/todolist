@@ -1,23 +1,26 @@
-import React from "react";
-import { Field, reduxForm } from "redux-form";
+import React, { useState, useContext } from "react";
+import { AlertContext } from "../../context/alert/alertContext";
 
-const Form = (props) => {
+const Form = () => {
+  const [value, setValue] = useState("");
+  const alert = useContext(AlertContext);
+  const submitHandler = (event) => {
+    event.preventDefault();
+    alert.show(value, "success");
+  };
   return (
-    <form onSubmit={props.handleSubmit}>
+    <form onSubmit={submitHandler}>
       <div className="form-group">
-        <Field
-          component="input"
+        <input
           type="text"
-          name="task"
           className="form-control"
-          placeholder="Добавьте задачу"
+          placeholder="Введите название заметки"
+          value={value}
+          onChange={(e) => setValue(e.target.value)}
         />
-        <button>sss</button>
       </div>
     </form>
   );
 };
 
-const TaskReduxForm = reduxForm({ form: "task" })(Form);
-
-export default TaskReduxForm;
+export default Form;

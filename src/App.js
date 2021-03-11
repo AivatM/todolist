@@ -1,26 +1,24 @@
-import { Provider } from "react-redux";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
-import AlertContainer from "./components/Alert/AlertContainer";
 import Navbar from "./components/Navbar/Navbar";
 import About from "./pages/About";
 import Home from "./pages/Home";
-import store from "./redux/store";
+import Alert from "./components/Alert/Alert";
+import { AlertState } from "./context/alert/AlertState";
 
 const App = (props) => {
   return (
-    <Provider store={store}>
+    <AlertState>
       <BrowserRouter>
         <Navbar />
-        <div className="container pt-4">
-          <AlertContainer />
+        <div className="container">
+          <Alert />
           <Switch>
-            <Route path={"/"} exact component={Home} />
-            <Route path={"/about"} exact component={About} />
+            <Route path="/" exact component={Home} />
+            <Route path="/about" exact component={About} />
           </Switch>
         </div>
       </BrowserRouter>
-    </Provider>
+    </AlertState>
   );
 };
-
 export default App;
